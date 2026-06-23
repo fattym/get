@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elimu Pepe Parent User Journey</title>
+    <style>
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+        :root {
+            --primary: #0284c7;
+            --primary-hover: #0369a1;
+            --primary-light: #f0f9ff;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --bg-page: #f8fafc;
+            --bg-card: #ffffff;
+            --border-color: #e2e8f0;
+            --phone-frame: #0f172a;
+        }
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            line-height: 1.6;
+            color: var(--text-main);
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            background-color: var(--bg-page);
+        }
+        
+        /* Modernized Header Group */
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        .logo-area {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            animation: bounce 2s infinite;
+        }
+        h1 {
+            color: var(--primary);
+            font-size: 2.8rem;
+            font-weight: 800;
+            margin: 0 0 10px 0;
+            letter-spacing: -0.5px;
+        }
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            font-weight: 400;
+            margin-bottom: 15px;
+        }
+        .platform-link {
+            display: inline-flex;
+            align-items: center;
+            background: var(--bg-card);
+            padding: 8px 18px;
+            border-radius: 30px;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
+            border: 1px solid var(--border-color);
+            transition: all 0.2s ease;
+        }
+        .platform-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(2, 132, 199, 0.1);
+            color: var(--primary-hover);
+        }
+        
+        /* Layout Timeline & Blocks */
+        .journey-container {
+            position: relative;
+        }
+        .step-block {
+            margin-bottom: 60px;
+            background: var(--bg-card);
+            border-radius: 24px;
+            box-shadow: 0 20px 40px -15px rgba(15, 23, 42, 0.05);
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .step-block:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 30px 50px -20px rgba(15, 23, 42, 0.1);
+        }
+        
+        .step-layout {
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+            min-height: 520px;
+        }
+        .step-info-cell {
+            flex: 1;
+            padding: 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .step-visual-cell {
+            width: 440px;
+            background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-left: 1px solid var(--border-color);
+            padding: 40px;
+            position: relative;
+        }
+        
+        /* Modern Badges & Text Styling */
+        .step-number {
+            display: inline-flex;
+            align-items: center;
+            background: var(--primary-light);
+            color: var(--primary-hover);
+            font-weight: 700;
+            font-size: 0.85rem;
+            letter-spacing: 1.5px;
+            padding: 6px 16px;
+            border-radius: 100px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            width: fit-content;
+        }
+        .step-title {
+            font-size: 2rem;
+            color: var(--text-main);
+            margin: 0 0 16px 0;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+        .step-desc {
+            color: #475569;
+            margin: 0;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+        .highlight {
+            color: var(--primary);
+            font-weight: 600;
+            background: linear-gradient(120deg, #e0f2fe 0%, #bae6fd 100%);
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+        
+        /* Sleek Smartphone Mockup Frame */
+        .phone-container {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .phone-frame {
+            width: 255px;
+            height: 490px;
+            border: 11px solid var(--phone-frame);
+            border-radius: 40px;
+            background: #ffffff;
+            position: relative;
+            box-shadow: 0 25px 60px -15px rgba(15, 23, 42, 0.3), 
+                        0 0 0 1px rgba(15, 23, 42, 0.05);
+            overflow: hidden;
+        }
+        
+        /* Premium Dynamic Island */
+        .phone-frame::before {
+            content: '';
+            position: absolute;
+            top: 6px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 85px;
+            height: 20px;
+            background: var(--phone-frame);
+            border-radius: 20px;
+            z-index: 30;
+        }
+
+        /* Screen Wrapper */
+        .phone-screen {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+            background: #ffffff;
+        }
+
+        /* Image Display & Live Canvas Mock Uploader */
+        .image-uploader-wrapper {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 10;
+        }
+        .preview-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            background: #ffffff;
+            display: none;
+        }
+
+        /* Dropzone Component Style */
+        .upload-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            text-align: center;
+            cursor: pointer;
+            background: #ffffff;
+            transition: background 0.2s ease;
+        }
+        .upload-placeholder:hover {
+            background: #f8fafc;
+        }
+        .icon-circle {
+            width: 56px;
+            height: 56px;
+            background: #f1f5f9;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 16px;
+            color: #94a3b8;
+            transition: all 0.2s ease;
+        }
+        .upload-placeholder:hover .icon-circle {
+            background: #e0f2fe;
+            color: var(--primary);
+            transform: scale(1.05);
+        }
+        .upload-placeholder span {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #475569;
+            margin-bottom: 4px;
+        }
+        .upload-placeholder .file-hint {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            line-height: 1.3;
+        }
+        .file-input {
+            display: none;
+        }
+
+        /* Float-Action Change Button Style */
+        .change-img-btn {
+            margin-top: 16px;
+            background: var(--bg-card);
+            border: 1px solid #cbd5e1;
+            padding: 8px 16px;
+            border-radius: 10px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #475569;
+            cursor: pointer;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .change-img-btn:hover {
+            background: #f8fafc;
+            border-color: #94a3b8;
+            color: var(--text-main);
+            transform: translateY(-1px);
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
+        }
+
+        /* Adaptive Mobile Styling Layout */
+        @media (max-width: 900px) {
+            .step-layout {
+                flex-direction: column;
+            }
+            .step-visual-cell {
+                width: 100%;
+                border-left: none;
+                border-top: 1px solid var(--border-color);
+                padding: 50px 20px;
+            }
+            .step-info-cell {
+                padding: 40px 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo-area">🎓</div>
+        <h1>Elimu Pepe</h1>
+        <div class="subtitle">Parent User Journey Walkthrough & Simulation Environment</div>
+        <a href="https://elimupepe.loholearning.co.ke/" target="_blank" class="platform-link">
+            Launch Portal Launchpad →
+        </a>
+    </header>
+
+    <div class="journey-container">
+        
+        <!-- Step 1 -->
+        <div class="step-block">
+            <div class="step-layout">
+                <div class="step-info-cell">
+                    <div class="step-number">Step 1</div>
+                    <h2 class="step-title">Visit the Website</h2>
+                    <p class="step-desc">Launch your browser window and enter the platform URL to initialize the application entry layout node context safely.</p>
+                </div>
+                <div class="step-visual-cell">
+                    <div class="phone-container">
+                        <div class="phone-frame">
+                            <div class="phone-screen">
+                                <div class="image-uploader-wrapper">
+                                    <label class="upload-placeholder" id="label-step1">
+                                        <div class="icon-circle">
+                                            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                                        </div>
+                                        <span>Click to Upload UI Image</span>
+                                        <span class="file-hint">Screenshot from 2026-06-23 11-15-59.png</span>
+                                        <input type="file" class="file-input" onchange="handleImageUpload(this, 'img-step1', 'label-step1')">
+                                    </label>
+                                    <img class="preview-img" id="img-step1" alt="Step 1 Surface View">
+                                </div>
+                            </div>
+                        </div>
+                        <button class="change-img-btn" onclick="resetImage('img-step1', 'label-step1')">🔄 Swap Layout</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="step-block">
+            <div class="step-layout">
+                <div class="step-info-cell">
+                    <div class="step-number">Step 2</div>
+                    <h2 class="step-title">Click Get Started</h2>
+                    <p class="step-desc">Locate and select the highlighted interactive operational module element labeled <span class="highlight">"Get Started"</span> centered on your loading screen canvas view.</p>
+                </div>
+                <div class="step-visual-cell">
+                    <div class="phone-container">
+                        <div class="phone-frame">
+                            <div class="phone-screen">
+                                <div class="image-uploader-wrapper">
+                                    <label class="upload-placeholder" id="label-step2">
+                                        <div class="icon-circle">
+                                            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                                        </div>
+                                        <span>Click to Upload UI Image</span>
+                                        <span class="file-hint">Screenshot from 2026-06-23 11-17-27.png</span>
+                                        <input type="file" class="file-input" onchange="handleImageUpload(this, 'img-step2', 'label-step2')">
+                                    </label>
+                                    <img class="preview-img" id="img-step2" alt="Step 2 Action Layout">
+                                </div>
+                            </div>
+                        </div>
+                        <button class="change-img-btn" onclick="resetImage('img-step2', 'label-step2')">🔄 Swap Layout</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="step-block">
+            <div class="step-layout">
+                <div class="step-info-cell">
+                    <div class="step-number">Step 3</div>
+                    <h2 class="step-title">Select "I am a Parent"</h2>
+                    <p class="step-desc">Choose your specified configuration environment role segment option labeled <span class="highlight">"I am a Parent"</span> within the account designation view interface.</p>
+                </div>
+                <div class="step-visual-cell">
+                    <div class="phone-container">
+                        <div class="phone-frame">
+                            <div class="phone-screen">
+                                <div class="image-uploader-wrapper">
+                                    <label class="upload-placeholder" id="label-step3">
+                                        <div class="icon-circle">
+                                            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                                        </div>
+                                        <span>Click to Upload UI Image</span>
+                                        <span class="file-hint">Select Parent Segment Matrix</span>
+                                        <input type="file" class="file-input" onchange="handleImageUpload(this, 'img-step3', 'label-step3')">
+                                    </label>
+                                    <img class="preview-img" id="img-step3" alt="Step 3 Segment Layout">
+                                </div>
+                            </div>
+                        </div>
+                        <button class="change-img-btn" onclick="resetImage('img-step3', 'label-step3')">🔄 Swap Layout</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="step-block">
+            <div class="step-layout">
+                <div class="step-info-cell">
+                    <div class="step-number">Step 4</div>
+                    <h2 class="step-title">Verify Safaricom Line</h2>
+                    <p class="step-desc">Input your operational telephone contact details into the text form component area to execute structural security handshake processes via your <span class="highlight">Safaricom line channel network</span>.</p>
+                </div>
+                <div class="step-visual-cell">
+                    <div class="phone-container">
+                        <div class="phone-frame">
+                            <div class="phone-screen">
+                                <div class="image-uploader-wrapper">
+                                    <label class="upload-placeholder" id="label-step4">
+                                        <div class="icon-circle">
+                                            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                                        </div>
+                                        <span>Click to Upload UI Image</span>
+                                        <span class="file-hint">Safaricom Authorization Screen</span>
+                                        <input type="file" class="file-input" onchange="handleImageUpload(this, 'img-step4', 'label-step4')">
+                                    </label>
+                                    <img class="preview-img" id="img-step4" alt="Step 4 Channel Verification">
+                                </div>
+                            </div>
+                        </div>
+                        <button class="change-img-btn" onclick="resetImage('img-step4', 'label-step4')">🔄 Swap Layout</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 5 -->
+        <div class="step-block">
+            <div class="step-layout">
+                <div class="step-info-cell">
+                    <div class="step-number">Step 5</div>
+                    <h2 class="step-title">Login as a Parent</h2>
+                    <p class="step-desc">Authorize your account identity vectors to open your personalized administration dashboard environment view wrapper panels seamlessly.</p>
+                </div>
+                <div class="step-visual-cell">
+                    <div class="phone-container">
+                        <div class="phone-frame">
+                            <div class="phone-screen">
+                                <div class="image-uploader-wrapper">
+                                    <label class="upload-placeholder" id="label-step5">
+                                        <div class="icon-circle">
+                                            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                                        </div>
+                                        <span>Click to Upload UI Image</span>
+                                        <span class="file-hint">Screenshot from 2026-06-23 11-02-51.png</span>
+                                        <input type="file" class="file-input" onchange="handleImageUpload(this, 'img-step5', 'label-step5')">
+                                    </label>
+                                    <img class="preview-img" id="img-step5" alt="Step 5 Portal Active Dashboard">
+                                </div>
+                            </div>
+                        </div>
+                        <button class="change-img-btn" onclick="resetImage('img-step5', 'label-step5')">🔄 Swap Layout</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 6 -->
+        <div class="step-block">
+            <div class="step-layout">
+                <div class="step-info-cell">
+                    <div class="step-number">Step 6</div>
+                    <h2 class="step-title">Add Learners</h2>
+                    <p class="step-desc">Select the <span class="highlight">"Add New Learner"</span> component node. Complete registration form data slots like Name, Grade level, and targeted County indices to initiate instant student index key codes.</p>
+                </div>
+                <div class="step-visual-cell">
+                    <div class="phone-container">
+                        <div class="phone-frame">
+                            <div class="phone-screen">
+                                <div class="image-uploader-wrapper">
+                                    <label class="upload-placeholder" id="label-step6">
+                                        <div class="icon-circle">
+                                            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                                        </div>
+                                        <span>Click to Upload UI Image</span>
+                                        <span class="file-hint">Screenshot from 2026-06-23 11-03-25.png</span>
+                                        <input type="file" class="file-input" onchange="handleImageUpload(this, 'img-step6', 'label-step6')">
+                                    </label>
+                                    <img class="preview-img" id="img-step6" alt="Step 6 Onboarding Canvas Form">
+                                </div>
+                            </div>
+                        </div>
+                        <button class="change-img-btn" onclick="resetImage('img-step6', 'label-step6')">🔄 Swap Layout</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 7 -->
+        <div class="step-block">
+            <div class="step-layout">
+                <div class="step-info-cell">
+                    <div class="step-number">Step 7</div>
+                    <h2 class="step-title">Manage Learners & Stealth Login</h2>
+                    <p class="step-desc">Open the tracking window layout panel labeled <span class="highlight">"Manage Learners"</span>. Review student screen metrics, or press the security proxy <span class="highlight">"Login"</span> element link to open and audit daily child engagement logs directly.</p>
+                </div>
+                <div class="step-visual-cell">
+                    <div class="phone-container">
+                        <div class="phone-frame">
+                            <div class="phone-screen">
+                                <div class="image-uploader-wrapper">
+                                    <label class="upload-placeholder" id="label-step7">
+                                        <div class="icon-circle">
+                                            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                                        </div>
+                                        <span>Click to Upload UI Image</span>
+                                        <span class="file-hint">Screenshot from 2026-06-23 11-03-54.png</span>
+                                        <input type="file" class="file-input" onchange="handleImageUpload(this, 'img-step7', 'label-step7')">
+                                    </label>
+                                    <img class="preview-img" id="img-step7" alt="Step 7 Management Interface Tracking Grid">
+                                </div>
+                            </div>
+                        </div>
+                        <button class="change-img-btn" onclick="resetImage('img-step7', 'label-step7')">🔄 Swap Layout</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        function handleImageUpload(input, imageId, labelId) {
+            const file = input.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const imgElement = document.getElementById(imageId);
+                    const labelElement = document.getElementById(labelId);
+                    
+                    imgElement.src = e.target.result;
+                    imgElement.style.display = 'block';
+                    labelElement.style.display = 'none';
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function resetImage(imageId, labelId) {
+            const imgElement = document.getElementById(imageId);
+            const labelElement = document.getElementById(labelId);
+            
+            imgElement.src = '';
+            imgElement.style.display = 'none';
+            labelElement.style.display = 'flex';
+            
+            const input = labelElement.querySelector('.file-input');
+            if (input) input.value = '';
+        }
+    </script>
+</body>
+</html>
