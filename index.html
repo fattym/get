@@ -34,9 +34,16 @@
             margin-bottom: 50px;
         }
         .logo-area {
-            font-size: 3rem;
-            margin-bottom: 10px;
-            animation: bounce 2s infinite;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 14px;
+            animation: bounce 2.4s ease-in-out infinite;
+        }
+        .logo-area img {
+            display: block;
+            width: 84px;
+            height: auto;
         }
         h1 {
             color: var(--primary);
@@ -222,7 +229,9 @@
 </head>
 <body>
     <header>
-        <div class="logo-area">🎓</div>
+        <div class="logo-area">
+            <img src="img/elimu.png" alt="Elimu Pepe Logo">
+        </div>
         <h1>Elimu Pepe</h1>
         <div class="subtitle">Parent User Journey Walkthrough & Simulation Environment</div>
         <a href="https://elimupepe.loholearning.co.ke/" target="_blank" class="platform-link">
