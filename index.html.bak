@@ -5,10 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Elimu Pepe Parent User Journey</title>
     <link rel="icon" type="image/x-icon" href="img/elimu.png" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-    />
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
       *,
       *::before,
@@ -36,12 +33,12 @@
         color: var(--text-main);
         max-width: 1200px;
         margin: 0 auto;
-        padding: 20px;
+        padding: 40px 20px;
         background-color: var(--bg-page);
       }
       header {
         text-align: center;
-        margin-bottom: 40px;
+        margin-bottom: 50px;
       }
       .logo-area {
         display: inline-flex;
@@ -57,16 +54,16 @@
       }
       h1 {
         color: var(--primary);
-        font-size: 2.2rem;
+        font-size: 2.8rem;
         font-weight: 800;
         margin: 0 0 10px 0;
         letter-spacing: -0.5px;
       }
-      .subtitle h2 {
+      .subtitle {
         color: var(--text-muted);
-        font-size: 1.1rem;
+        font-size: 1.2rem;
         font-weight: 400;
-        margin: 0 0 15px 0;
+        margin-bottom: 15px;
       }
       .platform-link {
         display: inline-flex;
@@ -91,7 +88,7 @@
         position: relative;
       }
       .step-block {
-        margin-bottom: 40px;
+        margin-bottom: 60px;
         background: var(--bg-card);
         border-radius: 24px;
         box-shadow: 0 20px 40px -15px rgba(15, 23, 42, 0.05);
@@ -107,24 +104,26 @@
       }
       .step-layout {
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
         width: 100%;
+        min-height: 520px;
       }
       .step-info-cell {
-        padding: 30px 20px;
+        flex: 1;
+        padding: 50px;
         display: flex;
         flex-direction: column;
         justify-content: center;
       }
       .step-visual-cell {
-        width: 100%;
+        width: 440px;
         background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        border-top: 1px solid var(--border-color);
-        padding: 40px 20px;
+        border-left: 1px solid var(--border-color);
+        padding: 40px;
         position: relative;
       }
       .step-number {
@@ -137,12 +136,12 @@
         letter-spacing: 1.5px;
         padding: 6px 16px;
         border-radius: 100px;
-        margin-bottom: 16px;
+        margin-bottom: 20px;
         text-transform: uppercase;
         width: fit-content;
       }
       .step-title {
-        font-size: 1.6rem;
+        font-size: 2rem;
         color: var(--text-main);
         margin: 0 0 16px 0;
         font-weight: 800;
@@ -150,20 +149,9 @@
       }
       .step-desc {
         color: #475569;
-        margin: 0 0 16px 0;
-        font-size: 1.05rem;
-        line-height: 1.7;
-      }
-      .step-list,
-      .step-bullets {
-        color: #475569;
-        font-size: 1.05rem;
-        line-height: 1.7;
         margin: 0;
-        padding-left: 20px;
-      }
-      .step-bullets li {
-        margin-bottom: 8px;
+        font-size: 1.1rem;
+        line-height: 1.8;
       }
       .highlight {
         color: var(--primary);
@@ -171,17 +159,17 @@
         background: linear-gradient(120deg, #e0f2fe 0%, #bae6fd 100%);
         padding: 2px 6px;
         border-radius: 4px;
-        text-decoration: none;
+        text-decoration: none ;
       }
       .phone-container {
         position: relative;
         display: flex;
         flex-direction: column;
         align-items: center;
-        width: 100%;
       }
       .flow-sequence {
         width: 100%;
+        max-width: 360px;
       }
       .flow-sequence-note {
         display: inline-flex;
@@ -197,8 +185,8 @@
       }
       .flow-sequence-grid {
         display: grid;
-        grid-template-columns: 1fr;
-        gap: 16px;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 12px;
       }
       .flow-shot {
         position: relative;
@@ -207,9 +195,6 @@
         border: 1px solid rgba(148, 163, 184, 0.45);
         background: #fff;
         box-shadow: 0 14px 30px -18px rgba(15, 23, 42, 0.35);
-        max-width: 255px;
-        margin: 0 auto;
-        width: 100%;
       }
       .flow-shot img {
         display: block;
@@ -229,7 +214,6 @@
         font-size: 0.78rem;
         font-weight: 800;
         letter-spacing: 0.6px;
-        z-index: 10;
       }
       .phone-frame {
         width: 255px;
@@ -269,20 +253,32 @@
         display: block;
         background: #ffffff;
       }
-      .support-float {
-        position: fixed;
-        bottom: 20px;
-        right: 20px;
-        background-color: #25d366;
-        color: white;
-        font-size: 24px;
-        padding: 15px;
-        border-radius: 50%;
-        text-decoration: none;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-        z-index: 1000;
+      .missing-shot {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+        background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        color: #475569;
+        text-align: center;
+        font-weight: 700;
+        letter-spacing: 0.2px;
       }
-
+          .whatsapp-float {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #25D366;
+  color: white;
+  font-size: 24px;
+  padding: 15px;
+  border-radius: 50%;
+  text-decoration: none;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  z-index: 1000;
+}
       @keyframes bounce {
         0%,
         100% {
@@ -292,50 +288,24 @@
           transform: translateY(-6px);
         }
       }
-
-      /* Desktop Adjustments Layered on Top */
-      @media (min-width: 900px) {
-        body {
-          padding: 40px 20px;
-        }
-        header {
-          margin-bottom: 50px;
-        }
-        h1 {
-          font-size: 2.8rem;
-        }
-        .subtitle h2 {
-          font-size: 1.2rem;
-        }
-        .step-block {
-          margin-bottom: 60px;
-        }
+      @media (max-width: 900px) {
         .step-layout {
-          flex-direction: row;
-          min-height: 520px;
-        }
-        .step-info-cell {
-          flex: 1;
-          padding: 50px;
+          flex-direction: column;
         }
         .step-visual-cell {
-          width: 440px;
-          border-top: none;
-          border-left: 1px solid var(--border-color);
-          padding: 40px;
+          width: 100%;
+          border-left: none;
+          border-top: 1px solid var(--border-color);
+          padding: 50px 20px;
         }
-        .step-title {
-          font-size: 2rem;
+        .step-info-cell {
+          padding: 40px 30px;
         }
         .flow-sequence {
-          max-width: 360px;
+          max-width: 100%;
         }
         .flow-sequence-grid {
-          grid-template-columns: repeat(3, minmax(0, 1fr));
-          gap: 12px;
-        }
-        .flow-shot {
-          max-width: 100%;
+          grid-template-columns: 1fr;
         }
       }
     </style>
@@ -347,11 +317,16 @@
       </div>
       <h1>Elimu Pepe</h1>
       <div class="subtitle"><h2>Get Started Walkthrough</h2></div>
-      <a href="./student.html" class="platform-link"> I am a Student → </a>
+      <a
+        href="./student.html"
+     
+        class="platform-link"
+      >
+        I am a Student →
+      </a>
     </header>
 
     <div class="journey-container">
-      <!-- Step 1 -->
       <div class="step-block">
         <div class="step-layout">
           <div class="step-info-cell">
@@ -359,8 +334,11 @@
             <h2 class="step-title">Visit the Website</h2>
             <p class="step-desc">
               Open your browser
-              <a class="highlight" href="https://elimupepe.loholearning.co.ke/"
-                >" here "</a
+              <a
+                class="highlight"
+                href="https://elimupepe.loholearning.co.ke/"
+              >
+                " here "</a
               >
               to start the application safely.
             </p>
@@ -381,7 +359,6 @@
         </div>
       </div>
 
-      <!-- Step 2 -->
       <div class="step-block">
         <div class="step-layout">
           <div class="step-info-cell">
@@ -389,7 +366,7 @@
             <h2 class="step-title">Click Get Started</h2>
             <p class="step-desc">
               Find and click the
-              <span class="highlight">"Get Started"</span> button in the center
+              <span class="highlight">"Get Started"</span>button in the center
               of your screen.
             </p>
           </div>
@@ -409,15 +386,14 @@
         </div>
       </div>
 
-      <!-- Step 3 -->
       <div class="step-block">
         <div class="step-layout">
           <div class="step-info-cell">
             <div class="step-number">Step 3</div>
             <h2 class="step-title">Select "I am a Parent"</h2>
             <p class="step-desc">
-              Select the <span class="highlight">"I am a Parent"</span> option
-              on the account setup screen.
+              Select the<span class="highlight">"I am a Parent"</span>option on
+              the account setup screen
             </p>
           </div>
           <div class="step-visual-cell">
@@ -436,15 +412,15 @@
         </div>
       </div>
 
-      <!-- Step 4 -->
       <div class="step-block">
         <div class="step-layout">
           <div class="step-info-cell">
             <div class="step-number">Step 4</div>
             <h2 class="step-title">Verify Safaricom Line</h2>
             <p class="step-desc">
-              You can use a <span class="highlight">Safaricom line</span> or a
-              stable Wi-Fi connection to move to the next step.
+              You can use a
+              <span class="highlight">Safaricom line </span>or a stable Wi-Fi
+              connection to move to the next step.
             </p>
           </div>
           <div class="step-visual-cell">
@@ -463,19 +439,20 @@
         </div>
       </div>
 
-      <!-- Step 5 -->
       <div class="step-block">
         <div class="step-layout">
           <div class="step-info-cell">
             <div class="step-number">Step 5</div>
             <h2 class="step-title">Choose a Payment Plan</h2>
-            <ol class="step-list">
-              <li>Review the available payment options.</li>
-              <li>Choose the plan that works best for your family.</li>
-              <li>Complete the checkout process.</li>
-              <li>Wait for payment confirmation.</li>
-              <li>Get automatically redirected to your dashboard.</li>
-            </ol>
+            <p class="step-desc">
+  <ol class="step-list">
+    <li>Review the available payment options.</li>
+    <li>Choose the plan that works best for your family.</li>
+    <li>Complete the checkout process.</li>
+    <li>Wait for payment confirmation.</li>
+    <li>Get automatically redirected to your dashboard.</li>
+  </ol>
+            </p>
           </div>
           <div class="step-visual-cell">
             <div class="flow-sequence">
@@ -511,16 +488,16 @@
         </div>
       </div>
 
-      <!-- Step 6 -->
       <div class="step-block">
         <div class="step-layout">
           <div class="step-info-cell">
             <div class="step-number">Step 6</div>
             <h2 class="step-title">Add Learners</h2>
             <p class="step-desc">
-              Select the <span class="highlight">"Add New Learner"</span> then
-              fill in the registration form with the learner’s Name, Grade
-              level, and County, and submit to generate the student index code.
+              Select the
+              <span class="highlight">"Add New Learner"</span>then fill in the
+              registration form with the learner’s Name, Grade level, and
+              County, and submit to generate the student index code.
             </p>
           </div>
           <div class="step-visual-cell">
@@ -539,23 +516,21 @@
         </div>
       </div>
 
-      <!-- Step 7 -->
       <div class="step-block">
         <div class="step-layout">
           <div class="step-info-cell">
             <div class="step-number">Step 7</div>
             <h2 class="step-title">Manage Learners & Secret Login</h2>
             <p class="step-desc">
-              Open <span class="highlight">"Manage Learners"</span>. Review
-              student details. From there, you can either:
-            </p>
-            <ul class="step-bullets">
-              <li>View student activity and performance details, or</li>
+              Open
+              <span class="highlight">"Manage Learners"</span>.<p> Review student s
+              From there, you can either:</p>
               <li>
-                Use the <span class="highlight">"Login"</span> element link to
-                open and audit daily child engagement logs directly.
+                view student activity and performance details, or </li><li>
+                <span class="highlight">"Login"</span> element link to open and
+                audit daily child engagement logs directly.</li>
               </li>
-            </ul>
+            </p>
           </div>
           <div class="step-visual-cell">
             <div class="phone-container">
@@ -572,16 +547,13 @@
           </div>
         </div>
       </div>
-
-      <!-- Sticky Float -->
-      <a
-        href="https://wa.me/254797349396"
-        class="support-float"
-        target="_blank"
-        title="Contact Support"
-      >
-        <i class="fas fa-headset"></i>
-      </a>
+      <a 
+  href="https://wa.me/254797349396" 
+  class="whatsapp-float" 
+  target="_blank"
+>
+  <i class="fab fa-whatsapp"></i> 
+</a>
     </div>
   </body>
 </html>

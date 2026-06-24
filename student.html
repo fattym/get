@@ -3,10 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Elimu Pepe Parent User Journey</title>
+    <title>Elimu Pepe Student User Journey</title>
     <link rel="icon" type="image/x-icon" href="img/elimu.png" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
     <style>
       *,
       *::before,
@@ -34,12 +36,12 @@
         color: var(--text-main);
         max-width: 1200px;
         margin: 0 auto;
-        padding: 40px 20px;
+        padding: 20px;
         background-color: var(--bg-page);
       }
       header {
         text-align: center;
-        margin-bottom: 50px;
+        margin-bottom: 40px;
       }
       .logo-area {
         display: inline-flex;
@@ -55,16 +57,16 @@
       }
       h1 {
         color: var(--primary);
-        font-size: 2.8rem;
+        font-size: 2.2rem;
         font-weight: 800;
         margin: 0 0 10px 0;
         letter-spacing: -0.5px;
       }
-      .subtitle {
+      .subtitle h2 {
         color: var(--text-muted);
-        font-size: 1.2rem;
+        font-size: 1.1rem;
         font-weight: 400;
-        margin-bottom: 15px;
+        margin: 0 0 15px 0;
       }
       .platform-link {
         display: inline-flex;
@@ -89,7 +91,7 @@
         position: relative;
       }
       .step-block {
-        margin-bottom: 60px;
+        margin-bottom: 40px;
         background: var(--bg-card);
         border-radius: 24px;
         box-shadow: 0 20px 40px -15px rgba(15, 23, 42, 0.05);
@@ -105,26 +107,24 @@
       }
       .step-layout {
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
         width: 100%;
-        min-height: 520px;
       }
       .step-info-cell {
-        flex: 1;
-        padding: 50px;
+        padding: 30px 20px;
         display: flex;
         flex-direction: column;
         justify-content: center;
       }
       .step-visual-cell {
-        width: 440px;
+        width: 100%;
         background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        border-left: 1px solid var(--border-color);
-        padding: 40px;
+        border-top: 1px solid var(--border-color);
+        padding: 40px 20px;
         position: relative;
       }
       .step-number {
@@ -137,12 +137,12 @@
         letter-spacing: 1.5px;
         padding: 6px 16px;
         border-radius: 100px;
-        margin-bottom: 20px;
+        margin-bottom: 16px;
         text-transform: uppercase;
         width: fit-content;
       }
       .step-title {
-        font-size: 2rem;
+        font-size: 1.6rem;
         color: var(--text-main);
         margin: 0 0 16px 0;
         font-weight: 800;
@@ -150,9 +150,24 @@
       }
       .step-desc {
         color: #475569;
-        margin: 0;
-        font-size: 1.1rem;
-        line-height: 1.8;
+        margin: 0 0 16px 0;
+        font-size: 1.05rem;
+        line-height: 1.7;
+      }
+      .features-wrapper h3 {
+        font-size: 1.15rem;
+        color: var(--text-main);
+        margin: 20px 0 8px 0;
+      }
+      .features-wrapper ul {
+        color: #475569;
+        font-size: 1.05rem;
+        line-height: 1.6;
+        margin: 0 0 20px 0;
+        padding-left: 20px;
+      }
+      .features-wrapper ul li {
+        margin-bottom: 4px;
       }
       .highlight {
         color: var(--primary);
@@ -167,10 +182,10 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+        width: 100%;
       }
       .flow-sequence {
         width: 100%;
-        max-width: 360px;
       }
       .flow-sequence-note {
         display: inline-flex;
@@ -186,8 +201,8 @@
       }
       .flow-sequence-grid {
         display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 12px;
+        grid-template-columns: 1fr;
+        gap: 16px;
       }
       .flow-shot {
         position: relative;
@@ -196,6 +211,9 @@
         border: 1px solid rgba(148, 163, 184, 0.45);
         background: #fff;
         box-shadow: 0 14px 30px -18px rgba(15, 23, 42, 0.35);
+        max-width: 255px;
+        margin: 0 auto;
+        width: 100%;
       }
       .flow-shot img {
         display: block;
@@ -215,6 +233,7 @@
         font-size: 0.78rem;
         font-weight: 800;
         letter-spacing: 0.6px;
+        z-index: 10;
       }
       .phone-frame {
         width: 255px;
@@ -254,36 +273,29 @@
         display: block;
         background: #ffffff;
       }
-      .missing-shot {
-        width: 100%;
-        height: 100%;
+      .support-float {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background-color: #25d366;
+        color: white;
+        font-size: 24px;
+        padding: 15px;
+        border-radius: 50%;
+        text-decoration: none;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        z-index: 1000;
         display: flex;
         align-items: center;
         justify-content: center;
-        padding: 24px;
-        background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-        color: #475569;
-        text-align: center;
-        font-weight: 700;
-        letter-spacing: 0.2px;
+        width: 55px;
+        height: 55px;
+        transition: background-color 0.2s ease;
       }
-      .whatsapp-float {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background-color: #25D366;
-  color: white;
-  font-size: 24px;
-  padding: 15px;
-  border-radius: 50%;
-  text-decoration: none;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-  z-index: 1000;
-}
+      .whatsapp-float:hover {
+        background-color: #1ebe5d;
+      }
 
-.whatsapp-float:hover {
-  background-color: #1ebe5d;
-}
       @keyframes bounce {
         0%,
         100% {
@@ -293,24 +305,50 @@
           transform: translateY(-6px);
         }
       }
-      @media (max-width: 900px) {
-        .step-layout {
-          flex-direction: column;
+
+      /* Desktop Layout Adjustments Rules */
+      @media (min-width: 900px) {
+        body {
+          padding: 40px 20px;
         }
-        .step-visual-cell {
-          width: 100%;
-          border-left: none;
-          border-top: 1px solid var(--border-color);
-          padding: 50px 20px;
+        header {
+          margin-bottom: 50px;
+        }
+        h1 {
+          font-size: 2.8rem;
+        }
+        .subtitle h2 {
+          font-size: 1.2rem;
+        }
+        .step-block {
+          margin-bottom: 60px;
+        }
+        .step-layout {
+          flex-direction: row;
+          min-height: 520px;
         }
         .step-info-cell {
-          padding: 40px 30px;
+          flex: 1;
+          padding: 50px;
+        }
+        .step-visual-cell {
+          width: 440px;
+          border-top: none;
+          border-left: 1px solid var(--border-color);
+          padding: 40px;
+        }
+        .step-title {
+          font-size: 2rem;
         }
         .flow-sequence {
-          max-width: 100%;
+          max-width: 360px;
         }
         .flow-sequence-grid {
-          grid-template-columns: 1fr;
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+          gap: 12px;
+        }
+        .flow-shot {
+          max-width: 100%;
         }
       }
     </style>
@@ -322,30 +360,24 @@
       </div>
       <h1>Elimu Pepe</h1>
       <div class="subtitle"><h2>Get Started Walkthrough</h2></div>
-      <a
-        href="./index.html"
-       
-        class="platform-link"
-      >
-      I am a  Parent →
-      </a>
+      <a href="./index.html" class="platform-link"> I am a Parent → </a>
     </header>
 
     <div class="journey-container">
+      <!-- Step 1 -->
       <div class="step-block">
         <div class="step-layout">
           <div class="step-info-cell">
             <div class="step-number">Step 1</div>
             <h2 class="step-title">Get The LOHO ID</h2>
             <p class="step-desc">
-           
+              Your Loho ID / Student ID is located on your learners section like
+              it is pointed on the image. Copy that for you to login.
               <a
                 class="highlight"
                 href="https://play.google.com/store/search?q=elimu+pepe&c=apps&hl=en"
+                >From The Parent Account</a
               >
-                "From The Parent Account"</a
-              >Your Loho ID/ Student ID  is located on your learners section like its pointed on the image.copy that for you to login .
-           
             </p>
           </div>
           <div class="step-visual-cell">
@@ -364,14 +396,22 @@
         </div>
       </div>
 
+      <!-- Step 2 -->
       <div class="step-block">
         <div class="step-layout">
           <div class="step-info-cell">
             <div class="step-number">Step 2</div>
             <h2 class="step-title">Get App From Playstore</h2>
             <p class="step-desc">
-              On your Android device, open the Google Play Store and search for "Elimu Pepe" or click the link below to download the app directly. Once installed, open the app and proceed to the next step. 
-              <a class="highlight"               href="https://play.google.com/store/search?q=elimu+pepe&c=apps&hl=en">"Here"</a>
+              On your Android device, open the Google Play Store and search for
+              "Elimu Pepe" or click the link below to download the app directly.
+              Once installed, open the app and proceed to the next step.
+              <a
+                class="highlight"
+                href="https://play.google.com/store/search?q=elimu+pepe&c=apps&hl=en"
+                >"Here"</a
+              >
+            </p>
           </div>
           <div class="step-visual-cell">
             <div class="phone-container">
@@ -389,14 +429,15 @@
         </div>
       </div>
 
+      <!-- Step 3 -->
       <div class="step-block">
         <div class="step-layout">
           <div class="step-info-cell">
             <div class="step-number">Step 3</div>
             <h2 class="step-title">Select "I am a Student"</h2>
             <p class="step-desc">
-              Select the<span class="highlight">"I am a Student"</span>option on
-              the account setup screen
+              Select the <span class="highlight">"I am a Student"</span> option
+              on the account setup screen.
             </p>
           </div>
           <div class="step-visual-cell">
@@ -415,14 +456,20 @@
         </div>
       </div>
 
+      <!-- Step 4 -->
       <div class="step-block">
         <div class="step-layout">
           <div class="step-info-cell">
             <div class="step-number">Step 4</div>
             <h2 class="step-title">Enter Your LOHO ID</h2>
             <p class="step-desc">
-              Your Loho ID/ Student ID is located on your learners section like its pointed on step 1.
-              <a class="highlight" href="https://elimupepe.loholearning.co.ke/send-password-reset-link">Forget Password click here to reset</a>
+              Your Loho ID / Student ID is located on your learners section like
+              it is pointed on step 1.
+              <a
+                class="highlight"
+                href="https://elimupepe.loholearning.co.ke/send-password-reset-link"
+                >Forgot Password? Click here to reset</a
+              >
             </p>
           </div>
           <div class="step-visual-cell">
@@ -441,57 +488,56 @@
         </div>
       </div>
 
+      <!-- Step 5 -->
       <div class="step-block">
         <div class="step-layout">
           <div class="step-info-cell">
             <div class="step-number">Step 5</div>
-            <h2 class="step-title">Proceed :What Elimu Pepe Can Do</h2>
-            <p class="step-desc">
-  <ol class="step-list">
-  <h3>🎓 Learning & Practice</h3>
-  <ul>
-    <li>Access lessons and learning content</li>
-    <li>Practice questions and exercises</li>
-    <li>Take quizzes and tests</li>
-    <li>Learn at their own pace</li>
-  </ul>
+            <h2 class="step-title">Proceed: What Elimu Pepe Can Do</h2>
 
-  <h3>📊 Track Progress</h3>
-  <ul>
-    <li>View performance and scores</li>
-    <li>Track improvement over time</li>
-    <li>See completed and pending activities</li>
-  </ul>
+            <div class="features-wrapper">
+              <h3>🎓 Learning & Practice</h3>
+              <ul>
+                <li>Access lessons and learning content</li>
+                <li>Practice questions and exercises</li>
+                <li>Take quizzes and tests</li>
+                <li>Learn at their own pace</li>
+              </ul>
 
-  <h3>🏆 Rewards & Motivation</h3>
-  <ul>
-    <li>Earn points from activities</li>
-    <li>Receive rewards from parents or system</li>
-    <li>Stay motivated through achievements</li>
-  </ul>
+              <h3>📊 Track Progress</h3>
+              <ul>
+                <li>View performance and scores</li>
+                <li>Track improvement over time</li>
+                <li>See completed and pending activities</li>
+              </ul>
 
-  <h3>🔐 Account Access</h3>
-  <ul>
-    <li>Log in using credentials given by parents</li>
-    <li>Use secure (hidden/secret) login access</li>
-    <li>Access a personal learning space</li>
-  </ul>
+              <h3>🏆 Rewards & Motivation</h3>
+              <ul>
+                <li>Earn points from activities</li>
+                <li>Receive rewards from parents or system</li>
+                <li>Stay motivated through achievements</li>
+              </ul>
 
-  <h3>📱 App Usage</h3>
-  <ul>
-    <li>Use the learner mobile app</li>
-    <li>Study anytime, anywhere</li>
-    <li>Continue learning outside school</li>
-  </ul>
+              <h3>🔐 Account Access</h3>
+              <ul>
+                <li>Log in using credentials given by parents</li>
+                <li>Use secure (hidden/secret) login access</li>
+                <li>Access a personal learning space</li>
+              </ul>
 
-  <h3>💬 Communication</h3>
-  <ul>
-    <li>Receive messages from parents or teachers</li>
-    <li>Stay updated on learning activities</li>
-  </ul>
+              <h3>📱 App Usage</h3>
+              <ul>
+                <li>Use the learner mobile app</li>
+                <li>Study anytime, anywhere</li>
+                <li>Continue learning outside school</li>
+              </ul>
 
-  </ol>
-            </p>
+              <h3>💬 Communication</h3>
+              <ul>
+                <li>Receive messages from parents or teachers</li>
+                <li>Stay updated on learning activities</li>
+              </ul>
+            </div>
           </div>
           <div class="step-visual-cell">
             <div class="flow-sequence">
@@ -527,13 +573,15 @@
         </div>
       </div>
 
-<a 
-  href="https://wa.me/254797349396" 
-  class="whatsapp-float" 
-  target="_blank"
->
-  <i class="fab fa-whatsapp"></i> 
-</a>
+      <!-- Sticky Float -->
+      <a
+        href="https://wa.me/254797349396"
+        class="support-float"
+        target="_blank"
+        title="Contact Support"
+      >
+        <i class="fas fa-headset"></i>
+      </a>
     </div>
   </body>
 </html>
