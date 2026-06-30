@@ -267,6 +267,16 @@
         display: block;
       }
 
+      @media (max-width: 899px) {
+        .step-block.swipe-enter-forward {
+          animation: slideInFromRight 0.34s ease both;
+        }
+
+        .step-block.swipe-enter-backward {
+          animation: slideInFromLeft 0.34s ease both;
+        }
+      }
+
       @keyframes fadeIn {
         from {
           opacity: 0;
@@ -275,6 +285,28 @@
         to {
           opacity: 1;
           transform: translateY(0);
+        }
+      }
+
+      @keyframes slideInFromRight {
+        from {
+          opacity: 0;
+          transform: translateX(22px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      @keyframes slideInFromLeft {
+        from {
+          opacity: 0;
+          transform: translateX(-22px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
         }
       }
 
@@ -1491,6 +1523,7 @@
       const stepBlocks = Array.from(document.querySelectorAll(".step-block"));
       const swipeHintKey = "elimu-pepe-mobile-swipe-hint-seen";
       let swipeTipTimeoutId = null;
+      let swipeMotionTimeoutId = null;
       let touchStartX = null;
       let touchStartY = null;
       let touchStartTime = null;
@@ -1515,6 +1548,17 @@
         }
         swipeTip.classList.remove("show");
         swipeTip.setAttribute("aria-hidden", "true");
+      };
+
+      const clearSwipeMotion = () => {
+        if (swipeMotionTimeoutId) {
+          window.clearTimeout(swipeMotionTimeoutId);
+          swipeMotionTimeoutId = null;
+        }
+
+        stepBlocks.forEach((block) => {
+          block.classList.remove("swipe-enter-forward", "swipe-enter-backward");
+        });
       };
 
       const showSwipeTip = () => {
@@ -1552,8 +1596,13 @@
         window.setTimeout(showSwipeTip, 650);
       };
 
-      const activateSection = (targetId, { closeSidebar = false } = {}) => {
+      const activateSection = (
+        targetId,
+        { closeSidebar = false, swipeDirection = null } = {},
+      ) => {
         if (!targetId) return;
+
+        clearSwipeMotion();
 
         sidebarLinks.forEach((item) => {
           item.classList.toggle("active", item.getAttribute("data-target") === targetId);
@@ -1565,6 +1614,21 @@
 
         const targetBlock = document.getElementById(targetId);
         if (targetBlock) {
+          if (isMobileView() && swipeDirection) {
+            targetBlock.classList.add(
+              swipeDirection === "forward"
+                ? "swipe-enter-forward"
+                : "swipe-enter-backward",
+            );
+
+            swipeMotionTimeoutId = window.setTimeout(() => {
+              targetBlock.classList.remove(
+                "swipe-enter-forward",
+                "swipe-enter-backward",
+              );
+            }, 380);
+          }
+
           window.scrollTo({
             top: targetBlock.offsetTop - 40,
             behavior: "smooth",
@@ -1583,7 +1647,10 @@
         const link = sidebarLinks[index];
         if (!link) return false;
 
-        activateSection(link.getAttribute("data-target"), { closeSidebar: true });
+        activateSection(link.getAttribute("data-target"), {
+          closeSidebar: true,
+          swipeDirection: index > getActiveSectionIndex() ? "forward" : "backward",
+        });
         return true;
       };
 
@@ -1672,6 +1739,7 @@
 
         if (!isMobileView()) {
           hideSwipeTip();
+          clearSwipeMotion();
         }
       });
 
