@@ -18,13 +18,14 @@
       :root {
         --primary: #0284c7;
         --primary-hover: #0369a1;
-        --primary-light: #f0f9ff;
+        --primary-light: #eef9f0;
         --text-main: #0f172a;
         --text-muted: #64748b;
         --bg-page: #f8fafc;
         --bg-card: #ffffff;
         --border-color: #e2e8f0;
         --phone-frame: #0f172a;
+        --sidebar-green: #0284c7;
       }
       body {
         font-family:
@@ -36,7 +37,7 @@
         color: var(--text-main);
         max-width: 1400px;
         margin: 0 auto;
-        padding: 20px 20px 90px 20px; /* Extra bottom padding for mobile navigation */
+        padding: 20px 20px 90px 20px;
         background-color: var(--bg-page);
       }
       header {
@@ -84,23 +85,94 @@
       }
       .platform-link:hover {
         transform: translateY(-2px);
-        box-shadow: 0 6px 15px rgba(2, 132, 199, 0.1);
+        box-shadow: 0 6px 15px rgba(56, 161, 73, 0.1);
         color: var(--primary-hover);
       }
 
-      /* Base Layout Configuration for Main Wrapper */
       .main-layout-wrapper {
         display: flex;
         flex-direction: column;
         gap: 30px;
       }
 
-      /* Responsive Navigation Sticky Sidebar/Bottom-bar Container */
+      .sidebar-toggle {
+        display: none;
+      }
+
+      .sidebar-backdrop {
+        display: none;
+      }
+
+      .swipe-tip {
+        position: fixed;
+        left: 50%;
+        bottom: 22px;
+        transform: translateX(-50%) translateY(24px);
+        opacity: 0;
+        pointer-events: none;
+        z-index: 1200;
+        width: min(92vw, 360px);
+        background: rgba(15, 23, 42, 0.96);
+        color: #fff;
+        border-radius: 18px;
+        padding: 14px 16px;
+        box-shadow: 0 18px 40px rgba(15, 23, 42, 0.28);
+        transition:
+          opacity 0.28s ease,
+          transform 0.28s ease;
+      }
+
+      .swipe-tip.show {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+        pointer-events: auto;
+      }
+
+      .swipe-tip-inner {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+      }
+
+      .swipe-tip-icon {
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        background: rgba(255, 255, 255, 0.12);
+        flex: 0 0 auto;
+      }
+
+      .swipe-tip-text {
+        flex: 1;
+      }
+
+      .swipe-tip-title {
+        font-size: 0.96rem;
+        font-weight: 800;
+        margin-bottom: 3px;
+      }
+
+      .swipe-tip-copy {
+        font-size: 0.88rem;
+        color: rgba(255, 255, 255, 0.82);
+      }
+
+      .swipe-tip-close {
+        border: 0;
+        background: transparent;
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 1rem;
+        line-height: 1;
+        padding: 4px;
+        cursor: pointer;
+      }
+
+      /* Green Sidebar Panel Layout Rules */
       .sticky-sidebar {
-        background: var(--bg-card);
-        border: 1px solid var(--border-color);
-        box-shadow: 0 -4px 20px rgba(15, 23, 42, 0.05);
-        padding: 12px 20px;
+        background-color: var(--sidebar-green);
+        color: #ffffff;
         position: fixed;
         bottom: 0;
         left: 0;
@@ -108,66 +180,104 @@
         z-index: 990;
         display: flex;
         flex-direction: row;
-        justify-content: space-around;
+        overflow-x: auto;
+        padding: 10px;
+        gap: 10px;
+        box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      .sidebar-category {
+        display: flex;
+        flex-direction: column;
+        min-width: max-content;
+      }
+
+      .category-header {
+        display: flex;
+        justify-content: space-between;
         align-items: center;
+        font-size: 0.75rem;
+        font-weight: 800;
+        letter-spacing: 1px;
+        color: rgba(255, 255, 255, 0.85);
+        padding: 4px 8px;
+        text-transform: uppercase;
       }
-      .sidebar-title {
-        display: none; /* Hidden on mobile */
+
+      .category-header i {
+        display: none;
       }
+
       .sidebar-menu {
         display: flex;
         flex-direction: row;
-        gap: 15px;
-        width: 100%;
-        justify-content: space-around;
+        gap: 8px;
         list-style: none;
         padding: 0;
         margin: 0;
       }
+
       .sidebar-link {
         display: flex;
-        flex-direction: column;
         align-items: center;
-        gap: 4px;
-        color: var(--text-muted);
+        gap: 8px;
+        color: rgba(255, 255, 255, 0.9);
         text-decoration: none;
-        font-size: 0.8rem;
+        font-size: 0.85rem;
         font-weight: 600;
-        transition: color 0.2s ease;
-        text-align: center;
+        padding: 6px 12px;
+        border-radius: 8px;
+        transition: background 0.2s ease;
+        white-space: nowrap;
       }
+
       .sidebar-link i {
-        font-size: 1.2rem;
-        color: var(--text-muted);
+        font-size: 1rem;
       }
+
+      .sidebar-link.indented {
+        padding-left: 12px;
+      }
+
       .sidebar-link:hover,
       .sidebar-link.active {
-        color: var(--primary);
-      }
-      .sidebar-link:hover i,
-      .sidebar-link.active i {
-        color: var(--primary);
+        background-color: rgba(255, 255, 255, 0.25);
+        color: #ffffff;
       }
 
       .journey-container {
         position: relative;
         width: 100%;
       }
+
+      /* Auto-hide feature configuration style */
       .step-block {
+        display: none;
         margin-bottom: 40px;
         background: var(--bg-card);
         border-radius: 24px;
         box-shadow: 0 20px 40px -15px rgba(15, 23, 42, 0.05);
         border: 1px solid var(--border-color);
         overflow: hidden;
-        transition:
-          transform 0.3s ease,
-          box-shadow 0.3s ease;
+        animation: fadeIn 0.4s ease;
       }
-      .step-block:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 30px 50px -20px rgba(15, 23, 42, 0.1);
+
+      /* Target active item visible element container */
+      .step-block.active {
+        display: block;
       }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(8px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
       .step-layout {
         display: flex;
         flex-direction: column;
@@ -235,7 +345,7 @@
       .highlight {
         color: var(--primary);
         font-weight: 600;
-        background: linear-gradient(120deg, #e0f2fe 0%, #bae6fd 100%);
+        background: linear-gradient(120deg, #e8f5e9 0%, #c8e6c9 100%);
         padding: 2px 6px;
         border-radius: 4px;
         text-decoration: none;
@@ -257,7 +367,7 @@
         margin-bottom: 14px;
         padding: 8px 14px;
         border-radius: 999px;
-        background: rgba(2, 132, 199, 0.08);
+        background: rgba(56, 161, 73, 0.08);
         color: var(--primary-hover);
         font-size: 0.9rem;
         font-weight: 700;
@@ -338,7 +448,7 @@
       }
       .whatsapp-float {
         position: fixed;
-        bottom: 75px; /* Pushed slightly higher on mobile to clear bottom navigation bar */
+        bottom: 85px;
         right: 20px;
         background-color: #25d366;
         color: white;
@@ -369,7 +479,6 @@
         }
       }
 
-      /* Desktop Adaptive Breakpoint Rules (min-width: 900px) */
       @media (min-width: 900px) {
         body {
           padding: 40px 20px;
@@ -384,7 +493,6 @@
           font-size: 1.2rem;
         }
 
-        /* Convert Bottom Mobile Navigation Into Proper Left Sticky Sidebar */
         .main-layout-wrapper {
           flex-direction: row;
           align-items: flex-start;
@@ -395,52 +503,69 @@
           bottom: auto;
           left: auto;
           right: auto;
-          width: 260px;
-          min-width: 260px;
-          padding: 30px 20px;
-          border-radius: 24px;
-          box-shadow: 0 20px 40px -15px rgba(15, 23, 42, 0.05);
+          width: 280px;
+          min-width: 280px;
+          padding: 24px 12px;
+          border-radius: 20px;
+          box-shadow: 0 20px 40px -15px rgba(15, 23, 42, 0.08);
           flex-direction: column;
-          align-items: flex-start;
-          justify-content: flex-start;
-          gap: 25px;
+          overflow-x: visible;
+          gap: 16px;
         }
-        .sidebar-title {
+
+        .sidebar-category {
+          width: 100%;
+        }
+
+        .category-header {
+          display: flex;
+          font-size: 0.78rem;
+          padding: 6px 12px;
+          margin-bottom: 4px;
+          cursor: pointer;
+        }
+
+        .category-header i {
           display: block;
-          font-size: 0.85rem;
-          text-transform: uppercase;
-          letter-spacing: 1.5px;
-          color: var(--text-muted);
-          font-weight: 700;
-          margin-bottom: 5px;
+          font-size: 0.7rem;
+          opacity: 0.7;
+          transition: transform 0.2s ease;
         }
+
+        .category-header.collapsed + .sidebar-menu {
+          display: none;
+        }
+
+        .category-header.collapsed i {
+          transform: rotate(-90deg);
+        }
+
         .sidebar-menu {
           flex-direction: column;
-          gap: 8px;
-          justify-content: flex-start;
+          gap: 3px;
+          width: 100%;
         }
         .sidebar-link {
-          flex-direction: row;
-          gap: 14px;
-          font-size: 1rem;
-          padding: 12px 16px;
-          border-radius: 12px;
+          font-size: 0.92rem;
+          padding: 10px 14px;
           width: 100%;
-          text-align: left;
         }
         .sidebar-link i {
-          font-size: 1.1rem;
-          width: 24px;
+          font-size: 1.05rem;
+          width: 22px;
           text-align: center;
         }
-        .sidebar-link:hover,
-        .sidebar-link.active {
-          background-color: var(--primary-light);
-          color: var(--primary);
+
+        .sidebar-link.indented {
+          padding-left: 44px;
         }
-        .sidebar-link:hover i,
-        .sidebar-link.active i {
-          color: var(--primary);
+
+        .sidebar-link:hover {
+          background-color: rgba(255, 255, 255, 0.12);
+        }
+
+        .sidebar-link.active {
+          background-color: rgba(255, 255, 255, 0.22);
         }
 
         .step-block {
@@ -477,70 +602,450 @@
           bottom: 40px;
         }
       }
+
+      @media (max-width: 899px) {
+        body {
+          max-width: none;
+          padding: 16px 16px 28px;
+        }
+
+        header {
+          margin-bottom: 24px;
+          padding-top: 8px;
+        }
+
+        h1 {
+          font-size: 1.9rem;
+        }
+
+        .subtitle h2 {
+          font-size: 1rem;
+          margin-bottom: 12px;
+        }
+
+        .platform-link {
+          font-size: 0.9rem;
+          padding: 8px 14px;
+        }
+
+        .sidebar-toggle {
+          display: inline-flex;
+          align-items: center;
+          gap: 10px;
+          position: fixed;
+          top: 16px;
+          left: 16px;
+          z-index: 1120;
+          border: 0;
+          border-radius: 999px;
+          padding: 12px 16px;
+          background: var(--sidebar-green);
+          color: #fff;
+          font: inherit;
+          font-weight: 700;
+          box-shadow: 0 12px 30px rgba(2, 132, 199, 0.25);
+        }
+
+        .sidebar-toggle i {
+          font-size: 1rem;
+        }
+
+        .sidebar-backdrop {
+          display: block;
+          position: fixed;
+          inset: 0;
+          background: rgba(15, 23, 42, 0.48);
+          opacity: 0;
+          pointer-events: none;
+          transition: opacity 0.25s ease;
+          z-index: 980;
+        }
+
+        .sidebar-backdrop.open {
+          opacity: 1;
+          pointer-events: auto;
+        }
+
+        .main-layout-wrapper {
+          display: block;
+        }
+
+        .sticky-sidebar {
+          position: fixed;
+          top: 70px;
+          left: 14px;
+          bottom: 14px;
+          right: auto;
+          width: min(86vw, 320px);
+          max-height: calc(100vh - 84px);
+          padding: 16px 12px;
+          border-radius: 20px;
+          box-shadow: 0 18px 36px rgba(15, 23, 42, 0.22);
+          flex-direction: column;
+          overflow-x: hidden;
+          overflow-y: auto;
+          gap: 14px;
+          transform: translateX(-120%);
+          transition: transform 0.28s ease;
+          z-index: 1100;
+        }
+
+        .sticky-sidebar.open {
+          transform: translateX(0);
+        }
+
+        .sidebar-category {
+          width: 100%;
+        }
+
+        .category-header {
+          display: flex;
+          font-size: 0.78rem;
+          padding: 6px 10px;
+          margin-bottom: 4px;
+          cursor: default;
+        }
+
+        .category-header i {
+          display: block;
+          font-size: 0.7rem;
+          opacity: 0.75;
+        }
+
+        .sidebar-menu {
+          flex-direction: column;
+          gap: 4px;
+          width: 100%;
+        }
+
+        .sidebar-link {
+          font-size: 0.92rem;
+          padding: 11px 12px;
+          width: 100%;
+        }
+
+        .sidebar-link i {
+          font-size: 1.02rem;
+          width: 22px;
+          text-align: center;
+        }
+
+        .sidebar-link.indented {
+          padding-left: 38px;
+        }
+
+        .sidebar-link:hover,
+        .sidebar-link.active {
+          background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .journey-container {
+          width: 100%;
+        }
+
+        .step-block {
+          margin-bottom: 24px;
+          border-radius: 18px;
+        }
+
+        .step-info-cell {
+          padding: 22px 18px;
+        }
+
+        .step-visual-cell {
+          padding: 26px 16px;
+        }
+
+        .phone-frame {
+          width: 100%;
+          max-width: 255px;
+          height: auto;
+          aspect-ratio: 255 / 490;
+        }
+
+        .whatsapp-float {
+          right: 16px;
+          bottom: 18px;
+          width: 52px;
+          height: 52px;
+          font-size: 22px;
+        }
+      }
     </style>
   </head>
   <body>
+    <button
+      type="button"
+      class="sidebar-toggle"
+      aria-controls="sidebar-navigation"
+      aria-expanded="false"
+    >
+      <i class="fa-solid fa-bars"></i>
+      <span>Menu</span>
+    </button>
+    <div class="sidebar-backdrop" aria-hidden="true"></div>
+    <div
+      class="swipe-tip"
+      id="swipe-tip"
+      role="status"
+      aria-live="polite"
+      aria-hidden="true"
+    >
+      <div class="swipe-tip-inner">
+        <div class="swipe-tip-icon">
+          <i class="fa-solid fa-hand-pointer"></i>
+        </div>
+        <div class="swipe-tip-text">
+          <div class="swipe-tip-title">Swipe to navigate</div>
+          <div class="swipe-tip-copy">
+            On mobile, swipe right to move forward and swipe left to go back.
+          </div>
+        </div>
+        <button
+          type="button"
+          class="swipe-tip-close"
+          aria-label="Dismiss swipe hint"
+        >
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+    </div>
+
     <header>
       <div class="logo-area">
         <img src="img/elimu.png" alt="Elimu Pepe Logo" />
       </div>
       <h1>Elimu Pepe</h1>
-      <div class="subtitle"><h2>Get Started Walkthrough</h2></div>
+      <div class="subtitle"><h2>Student Center Hub</h2></div>
       <a href="./index.html" class="platform-link"> I am a Parent → </a>
     </header>
 
-    <!-- Main Layout Wrapper Splits Sidebar and Journey Content -->
     <div class="main-layout-wrapper">
-      <!-- Left Sticky Sidebar Container -->
-      <aside class="sticky-sidebar">
-        <div class="sidebar-title">Navigation</div>
-        <ul class="sidebar-menu">
-          <li>
-            <a href="./start.html" class="sidebar-link">
-              <i class="fa-solid : fa-chalkboard-user"></i>
-              <span>Start Learning </span>
-            </a>
-          </li>
-          <li>
-            <a href="#school-section" class="sidebar-link">
-              <i class="fa-solid fa-school"></i>
-              <span>School</span>
-            </a>
-          </li>
-          <li>
-            <a
-              href="https://elimupepe.loholearning.co.ke/subscription/plans"
-              class="sidebar-link"
-              target="_blank"
-            >
-              <i class="fa-solid fa-credit-card"></i>
-              <span>Renew Subscription</span>
-            </a>
-          </li>
-          <li>
-            <a href="#loho-id-section" class="sidebar-link active">
-              <i class="fa-solid fa-id-card"></i>
-              <span>LOHO ID</span>
-            </a>
-          </li>
-        </ul>
+      <aside class="sticky-sidebar" id="sidebar-navigation">
+        <div class="sidebar-category">
+          <div class="category-header">
+            <span>Home</span>
+            <i class="fa-solid fa-chevron-down"></i>
+          </div>
+          <ul class="sidebar-menu">
+            <li>
+              <a
+                href="#dashboard"
+                class="sidebar-link active"
+                data-target="dashboard"
+              >
+                <i class="fa-solid fa-house"></i>
+                <span>Dashboard</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="sidebar-category">
+          <div class="category-header">
+            <span>Learn</span>
+            <i class="fa-solid fa-chevron-down"></i>
+          </div>
+          <ul class="sidebar-menu">
+            <li>
+              <a
+                href="#learning-areas"
+                class="sidebar-link"
+                data-target="learning-areas"
+              >
+                <i class="fa-solid fa-book"></i>
+                <span>My Learning Areas</span>
+              </a>
+            </li>
+            <li>
+              <a
+                href="#interactive-books"
+                class="sidebar-link"
+                data-target="interactive-books"
+              >
+                <i class="fa-solid fa-book-open"></i>
+                <span>Interactive Books</span>
+              </a>
+            </li>
+            <li>
+              <a
+                href="#non-interactive"
+                class="sidebar-link indented"
+                data-target="non-interactive"
+              >
+                <span>Non-Interactive Books</span>
+              </a>
+            </li>
+            <li>
+              <a
+                href="#dals-learning"
+                class="sidebar-link"
+                data-target="dals-learning"
+              >
+                <i class="fa-solid fa-video"></i>
+                <span>Dals Learning</span>
+              </a>
+            </li>
+            <li>
+              <a
+                href="#esoma-kids"
+                class="sidebar-link"
+                data-target="esoma-kids"
+              >
+                <i class="fa-solid fa-star"></i>
+                <span>Esoma Kids</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="sidebar-category">
+          <div class="category-header">
+            <span>Practice</span>
+            <i class="fa-solid fa-chevron-down"></i>
+          </div>
+          <ul class="sidebar-menu">
+            <li>
+              <a
+                href="#virtual-labs"
+                class="sidebar-link"
+                data-target="virtual-labs"
+              >
+                <i class="fa-solid fa-scale-balanced"></i>
+                <span>Virtual Labs</span>
+              </a>
+            </li>
+            <li>
+              <a
+                href="#elimu-quest"
+                class="sidebar-link"
+                data-target="elimu-quest"
+              >
+                <i class="fa-solid fa-bolt"></i>
+                <span>Elimu Quest</span>
+              </a>
+            </li>
+            <li>
+              <a href="#games" class="sidebar-link" data-target="games">
+                <i class="fa-solid fa-gamepad"></i>
+                <span>Games</span>
+              </a>
+            </li>
+            <li>
+              <a
+                href="#live-classes"
+                class="sidebar-link"
+                data-target="live-classes"
+              >
+                <i class="fa-solid fa-video"></i>
+                <span>Live Classes</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="sidebar-category">
+          <div class="category-header">
+            <span>Progress</span>
+            <i class="fa-solid fa-chevron-down"></i>
+          </div>
+          <ul class="sidebar-menu">
+            <li>
+              <a
+                href="#progress-quest"
+                class="sidebar-link"
+                data-target="progress-quest"
+              >
+                <i class="fa-solid fa-bolt"></i>
+                <span>Elimu Quest</span>
+              </a>
+            </li>
+            <li>
+              <a
+                href="#leaderboard"
+                class="sidebar-link"
+                data-target="leaderboard"
+              >
+                <i class="fa-solid fa-trophy"></i>
+                <span>Leaderboard</span>
+              </a>
+            </li>
+            <li>
+              <a href="#gradebook" class="sidebar-link" data-target="gradebook">
+                <i class="fa-solid fa-clipboard-list"></i>
+                <span>My Gradebook</span>
+              </a>
+            </li>
+            <li>
+              <a
+                href="#achievements"
+                class="sidebar-link indented"
+                data-target="achievements"
+              >
+                <span>Achievements</span>
+              </a>
+            </li>
+            <li>
+              <a
+                href="#my-questions"
+                class="sidebar-link"
+                data-target="my-questions"
+              >
+                <i class="fa-solid fa-circle-question"></i>
+                <span>My Questions</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="sidebar-category">
+          <div class="category-header">
+            <span>Support</span>
+            <i class="fa-solid fa-chevron-down"></i>
+          </div>
+          <ul class="sidebar-menu">
+            <li>
+              <a
+                href="#support-faq"
+                class="sidebar-link indented"
+                data-target="support-faq"
+              >
+                <span>FAQ / Contact</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="sidebar-category">
+          <div class="category-header">
+            <span>Live & Play</span>
+            <i class="fa-solid fa-chevron-down"></i>
+          </div>
+          <ul class="sidebar-menu">
+            <li>
+              <a
+                href="#loho-coins"
+                class="sidebar-link"
+                data-target="loho-coins"
+              >
+                <i class="fa-solid fa-coins"></i>
+                <span>LoHo Coins</span>
+              </a>
+            </li>
+          </ul>
+        </div>
       </aside>
 
       <div class="journey-container">
-        <!-- Step 1 -->
-        <div id="loho-id-section" class="step-block">
+        <div id="dashboard" class="step-block active">
           <div class="step-layout">
             <div class="step-info-cell">
-              <div class="step-number">Step 1</div>
-              <h2 class="step-title">Dashboard</h2>
+              <div class="step-number">Home Dashboard</div>
+              <h2 class="step-title">Welcome to Student Hub</h2>
               <p class="step-desc">
-                Your Loho ID / Student ID is located on your learners section
-                like it is pointed on the image. Copy that for you to login.
-                <a
-                  class="highlight"
-                  href="https://play.google.com/store/search?q=elimu+pepe&c=apps&hl=en"
-                  >From The Parent Account</a
-                >
+                Your main portal overview screen displays a brief snapshot of
+                current learning pathways, tasks assigned by instructors, and
+                immediate shortcut links into your ongoing subjects.
               </p>
             </div>
             <div class="step-visual-cell">
@@ -550,7 +1055,7 @@
                     <img
                       class="phone-image"
                       src="img/st/1a.png"
-                      alt="Step 1 Surface View"
+                      alt="Dashboard"
                     />
                   </div>
                 </div>
@@ -559,22 +1064,15 @@
           </div>
         </div>
 
-        <!-- Step 2 -->
-        <div class="step-block">
+        <div id="learning-areas" class="step-block">
           <div class="step-layout">
             <div class="step-info-cell">
-              <div class="step-number">My Learning Areas</div>
-              <h2 class="step-title">Get App From Playstore</h2>
+              <div class="step-number">Learn</div>
+              <h2 class="step-title">My Learning Areas</h2>
               <p class="step-desc">
-                On your Android device, open the Google Play Store and search
-                for "Elimu Pepe" or click the link below to download the app
-                directly. Once installed, open the app and proceed to the next
-                step.
-                <a
-                  class="highlight"
-                  href="https://play.google.com/store/search?q=elimu+pepe&c=apps&hl=en"
-                  >"Here"</a
-                >
+                Browse through all registered subjects and classroom core
+                courses tailored specifically to match Kenyan curriculum
+                requirements.
               </p>
             </div>
             <div class="step-visual-cell">
@@ -584,7 +1082,7 @@
                     <img
                       class="phone-image"
                       src="img/st/2.jpeg"
-                      alt="Step 2 Action Layout"
+                      alt="Learning Areas"
                     />
                   </div>
                 </div>
@@ -593,16 +1091,14 @@
           </div>
         </div>
 
-        <!-- Step 3 -->
-        <div class="step-block">
+        <div id="interactive-books" class="step-block">
           <div class="step-layout">
             <div class="step-info-cell">
-              <div class="step-number">Step 3</div>
-              <h2 class="step-title">Interactive & Non-interactive books</h2>
+              <div class="step-number">Learn</div>
+              <h2 class="step-title">Interactive E-Books</h2>
               <p class="step-desc">
-                Select the
-                <span class="highlight">"I am a Student"</span> option on the
-                account setup screen.
+                Read, engage, and complete challenges directly inside textbooks
+                containing pop quizzes and integrated animated multimedia.
               </p>
             </div>
             <div class="step-visual-cell">
@@ -612,7 +1108,7 @@
                     <img
                       class="phone-image"
                       src="img/st/3.png"
-                      alt="Step 3 Segment Layout"
+                      alt="Interactive Books"
                     />
                   </div>
                 </div>
@@ -621,20 +1117,14 @@
           </div>
         </div>
 
-        <!-- Step 4 -->
-        <div class="step-block">
+        <div id="non-interactive" class="step-block">
           <div class="step-layout">
             <div class="step-info-cell">
-              <div class="step-number">Step 4</div>
-              <h2 class="step-title">Enter Your LOHO ID</h2>
+              <div class="step-number">Learn</div>
+              <h2 class="step-title">Non-Interactive Books</h2>
               <p class="step-desc">
-                Your Loho ID / Student ID is located on your learners section
-                like it is pointed on step 1.
-                <a
-                  class="highlight"
-                  href="https://elimupepe.loholearning.co.ke/send-password-reset-link"
-                  >Forgot Password? Click here to reset</a
-                >
+                Access a library of reference text resources and downloadable
+                files for standard reading and off-line textbook viewing.
               </p>
             </div>
             <div class="step-visual-cell">
@@ -644,7 +1134,7 @@
                     <img
                       class="phone-image"
                       src="img/st/4.png"
-                      alt="Step 4 Channel Verification"
+                      alt="Non-Interactive Books"
                     />
                   </div>
                 </div>
@@ -653,89 +1143,46 @@
           </div>
         </div>
 
-        <!-- Step 5 -->
-        <div class="step-block">
+        <div id="dals-learning" class="step-block">
           <div class="step-layout">
             <div class="step-info-cell">
-              <div class="step-number">Step 5</div>
-              <h2 class="step-title">Proceed: What Elimu Pepe Can Do</h2>
-
-              <div class="features-wrapper">
-                <h3>🎓 Learning & Practice</h3>
-                <ul>
-                  <li>Access lessons and learning content</li>
-                  <li>Practice questions and exercises</li>
-                  <li>Take quizzes and tests</li>
-                  <li>Learn at their own pace</li>
-                </ul>
-
-                <h3>📊 Track Progress</h3>
-                <ul>
-                  <li>View performance and scores</li>
-                  <li>Track improvement over time</li>
-                  <li>See completed and pending activities</li>
-                </ul>
-
-                <h3>🏆 Rewards & Motivation</h3>
-                <ul>
-                  <li>Earn points from activities</li>
-                  <li>Receive rewards from parents or system</li>
-                  <li>Stay motivated through achievements</li>
-                </ul>
-
-                <h3>🔐 Account Access</h3>
-                <ul>
-                  <li>Log in using credentials given by parents</li>
-                  <li>Use secure (hidden/secret) login access</li>
-                  <li>Access a personal learning space</li>
-                </ul>
-
-                <h3>📱 App Usage</h3>
-                <ul>
-                  <li>Use the learner mobile app</li>
-                  <li>Study anytime, anywhere</li>
-                  <li>Continue learning outside school</li>
-                </ul>
-
-                <h3 id="teacher-section">💬 Communication & Teachers</h3>
-                <ul>
-                  <li>Receive messages from parents or teachers</li>
-                  <li>Stay updated on learning activities</li>
-                </ul>
-
-                <h3 id="school-section">🏫 School Integration</h3>
-                <ul>
-                  <li>Sync activities with classroom curriculum goals</li>
-                  <li>Complements Kenyan CBC classroom syllabus structures</li>
-                </ul>
-              </div>
+              <div class="step-number">Learn</div>
+              <h2 class="step-title">Dals Learning</h2>
+              <p class="step-desc">
+                Watch curated educational broadcasts and video breakdowns mapped
+                to individual learning units.
+              </p>
             </div>
             <div class="step-visual-cell">
               <div class="flow-sequence">
-                <div class="flow-sequence-note">Flow order: 5A → 5B → 5C</div>
                 <div class="flow-sequence-grid">
                   <div class="flow-shot">
-                    <span class="flow-shot-label">5A</span>
-                    <img
-                      class="phone-image"
-                      src="img/st/5A.png"
-                      alt="Step 5A payment plan selection screen"
-                    />
+                    <img class="phone-image" src="img/st/5A.png" alt="Dals" />
                   </div>
-                  <div class="flow-shot">
-                    <span class="flow-shot-label">5B</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="esoma-kids" class="step-block">
+          <div class="step-layout">
+            <div class="step-info-cell">
+              <div class="step-number">Learn</div>
+              <h2 class="step-title">Esoma Kids Corner</h2>
+              <p class="step-desc">
+                Gamified educational paths containing creative workflows for
+                young learners on fundamental tracking subjects.
+              </p>
+            </div>
+            <div class="step-visual-cell">
+              <div class="phone-container">
+                <div class="phone-frame">
+                  <div class="phone-screen">
                     <img
                       class="phone-image"
-                      src="img/st/5B.jpeg"
-                      alt="Step 5B payment confirmation screen"
-                    />
-                  </div>
-                  <div class="flow-shot">
-                    <span class="flow-shot-label">5C</span>
-                    <img
-                      class="phone-image"
-                      src="img/st/5C.png"
-                      alt="Step 5C parents dashboard redirect screen"
+                      src="img/st/3.png"
+                      alt="Esoma Kids"
                     />
                   </div>
                 </div>
@@ -744,7 +1191,284 @@
           </div>
         </div>
 
-        <!-- Sticky Float -->
+        <div id="virtual-labs" class="step-block">
+          <div class="step-layout">
+            <div class="step-info-cell">
+              <div class="step-number">Practice</div>
+              <h2 class="step-title">Virtual Labs Experiments</h2>
+              <p class="step-desc">
+                Perform safe science tests and practical assignments via
+                interactive visual sandboxes right inside your digital display.
+              </p>
+            </div>
+            <div class="step-visual-cell">
+              <div class="phone-container">
+                <div class="phone-frame">
+                  <div class="phone-screen">
+                    <img
+                      class="phone-image"
+                      src="img/st/1a.png"
+                      alt="Virtual Labs"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="elimu-quest" class="step-block">
+          <div class="step-layout">
+            <div class="step-info-cell">
+              <div class="step-number">Practice</div>
+              <h2 class="step-title">Elimu Quest Challenges</h2>
+              <p class="step-desc">
+                Test yourself with timed problem sets across customizable themes
+                to prepare for end-of-term evaluations.
+              </p>
+            </div>
+            <div class="step-visual-cell">
+              <div class="phone-container">
+                <div class="phone-frame">
+                  <div class="phone-screen">
+                    <img
+                      class="phone-image"
+                      src="img/st/2.jpeg"
+                      alt="Elimu Quest"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="games" class="step-block">
+          <div class="step-layout">
+            <div class="step-info-cell">
+              <div class="step-number">Practice</div>
+              <h2 class="step-title">Educational Mini-Games</h2>
+              <p class="step-desc">
+                Play quick brain training puzzles designed to sharpen logical
+                and critical deduction loops.
+              </p>
+            </div>
+            <div class="step-visual-cell">
+              <div class="phone-container">
+                <div class="phone-frame">
+                  <div class="phone-screen">
+                    <img class="phone-image" src="img/st/4.png" alt="Games" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="live-classes" class="step-block">
+          <div class="step-layout">
+            <div class="step-info-cell">
+              <div class="step-number">Practice</div>
+              <h2 class="step-title">Live Interactive Classes</h2>
+              <p class="step-desc">
+                Join live streaming channels hosted by instructors for direct
+                lecture sessions.
+              </p>
+            </div>
+            <div class="step-visual-cell">
+              <div class="flow-sequence">
+                <div class="flow-sequence-grid">
+                  <div class="flow-shot">
+                    <img
+                      class="phone-image"
+                      src="img/st/5B.jpeg"
+                      alt="Live Classes"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="progress-quest" class="step-block">
+          <div class="step-layout">
+            <div class="step-info-cell">
+              <div class="step-number">Progress</div>
+              <h2 class="step-title">Quest Performance Analytics</h2>
+              <p class="step-desc">
+                Review automated deep-dive statistics displaying accuracy
+                curves, strengths, and areas requiring review.
+              </p>
+            </div>
+            <div class="step-visual-cell">
+              <div class="phone-container">
+                <div class="phone-frame">
+                  <div class="phone-screen">
+                    <img
+                      class="phone-image"
+                      src="img/st/2.jpeg"
+                      alt="Quest Analytics"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="leaderboard" class="step-block">
+          <div class="step-layout">
+            <div class="step-info-cell">
+              <div class="step-number">Progress</div>
+              <h2 class="step-title">Global Leaderboard Rank</h2>
+              <p class="step-desc">
+                See where you stand compared to fellow learners across the
+                platform based on activity performance streaks.
+              </p>
+            </div>
+            <div class="step-visual-cell">
+              <div class="phone-container">
+                <div class="phone-frame">
+                  <div class="phone-screen">
+                    <img
+                      class="phone-image"
+                      src="img/st/1a.png"
+                      alt="Leaderboard"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="gradebook" class="step-block">
+          <div class="step-layout">
+            <div class="step-info-cell">
+              <div class="step-number">Progress</div>
+              <h2 class="step-title">My Complete Gradebook</h2>
+              <p class="step-desc">
+                A structured registry detailing school course evaluation sheets
+                and instructor comments.
+              </p>
+            </div>
+            <div class="step-visual-cell">
+              <div class="phone-container">
+                <div class="phone-frame">
+                  <div class="phone-screen">
+                    <img
+                      class="phone-image"
+                      src="img/st/3.png"
+                      alt="Gradebook"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="achievements" class="step-block">
+          <div class="step-layout">
+            <div class="step-info-cell">
+              <div class="step-number">Progress</div>
+              <h2 class="step-title">Badges & Accomplishments</h2>
+              <p class="step-desc">
+                Unlock platform collectibles for maintaining consistent daily
+                streaks and completing task tiers.
+              </p>
+            </div>
+            <div class="step-visual-cell">
+              <div class="phone-container">
+                <div class="phone-frame">
+                  <div class="phone-screen">
+                    <img
+                      class="phone-image"
+                      src="img/st/4.png"
+                      alt="Achievements"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="my-questions" class="step-block">
+          <div class="step-layout">
+            <div class="step-info-cell">
+              <div class="step-number">Progress</div>
+              <h2 class="step-title">My Saved Questions</h2>
+              <p class="step-desc">
+                Review flagged questions or review forum tickets submitted to
+                online study assistants.
+              </p>
+            </div>
+            <div class="step-visual-cell">
+              <div class="phone-container">
+                <div class="phone-frame">
+                  <div class="phone-screen">
+                    <img
+                      class="phone-image"
+                      src="img/st/1a.png"
+                      alt="My Questions"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="support-faq" class="step-block">
+          <div class="step-layout">
+            <div class="step-info-cell">
+              <div class="step-number">Support</div>
+              <h2 class="step-title">FAQ & Support Desk</h2>
+              <p class="step-desc">
+                Troubleshoot subscription models, resolve access difficulties,
+                or ping technical assistants for immediate system help.
+              </p>
+            </div>
+            <div class="step-visual-cell">
+              <div class="flow-sequence">
+                <div class="flow-sequence-grid">
+                  <div class="flow-shot">
+                    <img class="phone-image" src="img/st/5C.png" alt="FAQ" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="loho-coins" class="step-block">
+          <div class="step-layout">
+            <div class="step-info-cell">
+              <div class="step-number">Live & Play</div>
+              <h2 class="step-title">LoHo Digital Wallet Balance</h2>
+              <p class="step-desc">
+                Manage your profile's collected LoHo digital tokens used to open
+                accessory items, tools, and mini-games.
+              </p>
+            </div>
+            <div class="step-visual-cell">
+              <div class="phone-container">
+                <div class="phone-frame">
+                  <div class="phone-screen">
+                    <img
+                      class="phone-image"
+                      src="img/st/4.png"
+                      alt="LoHo Coins"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <a
           href="https://wa.me/254797349396"
           class="whatsapp-float"
@@ -754,5 +1478,210 @@
         </a>
       </div>
     </div>
+
+    <script>
+      const sidebar = document.querySelector(".sticky-sidebar");
+      const sidebarToggle = document.querySelector(".sidebar-toggle");
+      const sidebarBackdrop = document.querySelector(".sidebar-backdrop");
+      const swipeTip = document.getElementById("swipe-tip");
+      const swipeTipClose = document.querySelector(".swipe-tip-close");
+      const sidebarLinks = Array.from(
+        document.querySelectorAll(".sidebar-link[data-target]"),
+      );
+      const stepBlocks = Array.from(document.querySelectorAll(".step-block"));
+      const swipeHintKey = "elimu-pepe-mobile-swipe-hint-seen";
+      let swipeTipTimeoutId = null;
+      let touchStartX = null;
+      let touchStartY = null;
+      let touchStartTime = null;
+
+      const isMobileView = () => window.innerWidth < 900;
+      const isTouchDevice = () =>
+        window.matchMedia("(pointer: coarse)").matches ||
+        navigator.maxTouchPoints > 0;
+
+      const setSidebarOpen = (isOpen) => {
+        sidebar.classList.toggle("open", isOpen);
+        sidebarBackdrop.classList.toggle("open", isOpen);
+        sidebarToggle.setAttribute("aria-expanded", String(isOpen));
+        document.body.style.overflow =
+          isOpen && isMobileView() ? "hidden" : "";
+      };
+
+      const hideSwipeTip = () => {
+        if (swipeTipTimeoutId) {
+          window.clearTimeout(swipeTipTimeoutId);
+          swipeTipTimeoutId = null;
+        }
+        swipeTip.classList.remove("show");
+        swipeTip.setAttribute("aria-hidden", "true");
+      };
+
+      const showSwipeTip = () => {
+        if (!isMobileView() || !isTouchDevice()) return;
+        swipeTip.classList.add("show");
+        swipeTip.setAttribute("aria-hidden", "false");
+
+        if (swipeTipTimeoutId) {
+          window.clearTimeout(swipeTipTimeoutId);
+        }
+
+        swipeTipTimeoutId = window.setTimeout(() => {
+          hideSwipeTip();
+        }, 6500);
+      };
+
+      const markSwipeTipSeen = () => {
+        try {
+          localStorage.setItem(swipeHintKey, "1");
+        } catch (error) {
+          // Ignore storage failures and just hide the hint.
+        }
+        hideSwipeTip();
+      };
+
+      const maybeShowSwipeTip = () => {
+        if (!isMobileView() || !isTouchDevice()) return;
+
+        try {
+          if (localStorage.getItem(swipeHintKey) === "1") return;
+        } catch (error) {
+          // If storage is blocked, we still show the hint once per session.
+        }
+
+        window.setTimeout(showSwipeTip, 650);
+      };
+
+      const activateSection = (targetId, { closeSidebar = false } = {}) => {
+        if (!targetId) return;
+
+        sidebarLinks.forEach((item) => {
+          item.classList.toggle("active", item.getAttribute("data-target") === targetId);
+        });
+
+        stepBlocks.forEach((block) => {
+          block.classList.toggle("active", block.id === targetId);
+        });
+
+        const targetBlock = document.getElementById(targetId);
+        if (targetBlock) {
+          window.scrollTo({
+            top: targetBlock.offsetTop - 40,
+            behavior: "smooth",
+          });
+        }
+
+        if (closeSidebar && isMobileView()) {
+          setSidebarOpen(false);
+        }
+      };
+
+      const getActiveSectionIndex = () =>
+        sidebarLinks.findIndex((link) => link.classList.contains("active"));
+
+      const goToSectionIndex = (index) => {
+        const link = sidebarLinks[index];
+        if (!link) return false;
+
+        activateSection(link.getAttribute("data-target"), { closeSidebar: true });
+        return true;
+      };
+
+      sidebarToggle.addEventListener("click", () => {
+        setSidebarOpen(!sidebar.classList.contains("open"));
+      });
+
+      sidebarBackdrop.addEventListener("click", () => {
+        setSidebarOpen(false);
+      });
+
+      swipeTipClose.addEventListener("click", markSwipeTipSeen);
+      swipeTip.addEventListener("click", markSwipeTipSeen);
+
+      // Sidebar category drop-down toggles for desktop viewport layout
+      document.querySelectorAll(".category-header").forEach((header) => {
+        header.addEventListener("click", () => {
+          if (window.innerWidth >= 900) {
+            header.classList.toggle("collapsed");
+          }
+        });
+      });
+
+      // Unified layout switching and scroll engine
+      sidebarLinks.forEach((link) => {
+        link.addEventListener("click", (e) => {
+          e.preventDefault();
+
+          const targetId = link.getAttribute("data-target");
+          if (!targetId) return;
+          activateSection(targetId, { closeSidebar: true });
+        });
+      });
+
+      document.addEventListener(
+        "touchstart",
+        (event) => {
+          if (!isMobileView() || event.touches.length !== 1) return;
+
+          const touch = event.touches[0];
+          touchStartX = touch.clientX;
+          touchStartY = touch.clientY;
+          touchStartTime = Date.now();
+        },
+        { passive: true },
+      );
+
+      document.addEventListener(
+        "touchend",
+        (event) => {
+          if (!isMobileView() || touchStartX === null || touchStartY === null) {
+            return;
+          }
+
+          const touch = event.changedTouches[0];
+          const deltaX = touch.clientX - touchStartX;
+          const deltaY = touch.clientY - touchStartY;
+          const elapsed = Date.now() - touchStartTime;
+
+          touchStartX = null;
+          touchStartY = null;
+          touchStartTime = null;
+
+          if (elapsed > 900) return;
+          if (Math.abs(deltaX) < 70) return;
+          if (Math.abs(deltaX) <= Math.abs(deltaY)) return;
+          if (Math.abs(deltaY) > 70) return;
+
+          const currentIndex = getActiveSectionIndex();
+          if (currentIndex < 0) return;
+
+          const nextIndex = deltaX > 0 ? currentIndex + 1 : currentIndex - 1;
+
+          if (nextIndex >= 0 && nextIndex < sidebarLinks.length) {
+            goToSectionIndex(nextIndex);
+            markSwipeTipSeen();
+          }
+        },
+        { passive: true },
+      );
+
+      window.addEventListener("resize", () => {
+        if (window.innerWidth >= 900) {
+          setSidebarOpen(false);
+        }
+
+        if (!isMobileView()) {
+          hideSwipeTip();
+        }
+      });
+
+      window.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") {
+          setSidebarOpen(false);
+        }
+      });
+
+      maybeShowSwipeTip();
+    </script>
   </body>
 </html>
